@@ -4,7 +4,7 @@ import numpy
 
 def main():
     # Set up OpenCL
-    context = cl.create_some_context(False) #don't ask user about platform
+    context = cl.create_some_context(False)  # don't ask user about platform
     queue = cl.CommandQueue(context)
 
     with open("resources/kmp_pocl.cl", "r") as kernel_file:
@@ -12,14 +12,13 @@ def main():
 
     program = cl.Program(context, kernel_src).build()
 
-    #read data
-    string = "acbcbck"
-    pattern = "cbc"
+    # read data
+    string = "abaacdaacdaacdaa"
+    pattern = "aa"
 
-    #calculate prefix function for pattern
+    # calculate prefix function for pattern
     pi = numpy.array(prefix_func(pattern)).astype(numpy.int)
-
-    #initialize the result array
+    # initialize the result array
     matches = numpy.zeros(len(string)).astype(numpy.int)
 
     # Create the input (string, pattern, pi) strings in device memory and copy data from host
@@ -39,7 +38,7 @@ def main():
     # Read back the results from the compute device
     cl.enqueue_copy(queue, matches, d_matches)
 
-    print (matches)
+    print(matches)
 
 
 def prefix_func(pattern):
@@ -66,6 +65,3 @@ def read_data_from(file_name):
     return string
 
 main()
-
-
-
