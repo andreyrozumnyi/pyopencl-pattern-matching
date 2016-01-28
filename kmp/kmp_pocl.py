@@ -1,5 +1,6 @@
 import pyopencl as cl
 import numpy
+PIECES_NUM = 1
 
 
 def main():
@@ -13,8 +14,11 @@ def main():
     program = cl.Program(context, kernel_src).build()
 
     # read data
-    string = "abaacdaacdaacdaa"
-    pattern = "aa"
+    string = "abcbcbasdca"
+    pattern = "bcb"
+    if len(string)/PIECES_NUM <= len(pattern) or PIECES_NUM > len(string):
+        raise ValueError("Choose less number of pieces as one piece length less than pattern length "
+                         "or pieces number is more than string length")
 
     # calculate prefix function for pattern
     pi = numpy.array(prefix_func(pattern)).astype(numpy.int)
@@ -29,8 +33,9 @@ def main():
     d_matches = cl.Buffer(context, cl.mem_flags.WRITE_ONLY, matches.nbytes)
 
     search = program.kmp_search
-    search.set_scalar_arg_dtypes([None, None, None, int, int, None])
-    search(queue, (len(string)-len(pattern)+1, ), None, d_str, d_pat, d_pi, len(string), len(pattern), d_matches)
+    search.set_scalar_arg_dtypes([None, None, None, int, int, int, None])
+    search(queue, (len(string)-len(pattern)+1, ), None, d_str, d_pat, d_pi,
+           len(string), len(pattern), PIECES_NUM, d_matches)
 
     # Wait for the commands to finish before reading back
     queue.finish()

@@ -4,9 +4,9 @@ __kernel void kmp_search(
     __global int* pi,
     const int text_len,
     const int pattern_len,
+    const int pieces_num,
     __global int* matches)
 {
-    int pieces_num = 2;
     int i = get_global_id(0);
     int start = pieces_num * i;
     int index_in_piece = 0;
