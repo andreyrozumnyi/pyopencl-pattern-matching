@@ -20,7 +20,6 @@ class KnuthMorrisPrattPOCL:
 
         program = cl.Program(context, kernel_src).build()
 
-        # read data
         if (self.text_len/self.pieces_num <= len(pattern)) or (self.pieces_num > self.text_len):
             raise ValueError("Choose less number of pieces as one piece length less than pattern length "
                              "or pieces number is more than string length")

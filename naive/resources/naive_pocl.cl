@@ -15,9 +15,7 @@ __kernel void naive_search(
         }
 
         matches[i] = (j == pattern_len) ? 1 : 0;
-    }
-
-    if ((i+pattern_len > string_len) && (i < string_len)) {
+    } else if (((i+pattern_len > string_len) || (i >= string_len-pattern_len+1)) && (i < string_len)) {
         matches[i] = 0;
     }
 }

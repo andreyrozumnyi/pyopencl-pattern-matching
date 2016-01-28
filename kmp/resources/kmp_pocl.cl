@@ -31,7 +31,6 @@ __kernel void kmp_search(
         index_in_piece++;
     }
 
-    //TODO when pattern_len >= piece_len
     if (text_len-start <= piece_len) {
         int index = text_len - pattern_len + 1;
         while (index < text_len) {
