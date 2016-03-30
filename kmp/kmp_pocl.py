@@ -38,7 +38,7 @@ class KnuthMorrisPrattPOCL:
 
         search = program.kmp_search
         search.set_scalar_arg_dtypes([None, None, None, int, int, int, None])
-        search(queue, (self.text_len-len(pattern)+1, ), None, d_str, d_pat, d_pi,
+        search(queue, (2*self.pieces_num - 1, ), None, d_str, d_pat, d_pi,
                self.text_len, len(pattern), self.pieces_num, d_matches)
 
         # Wait for the commands to finish before reading back
@@ -61,3 +61,7 @@ class KnuthMorrisPrattPOCL:
                 k += 1
             pi[i] = k
         return pi
+
+
+obj = KnuthMorrisPrattPOCL("AAABBBCCC")
+print(obj.run("BBB"))

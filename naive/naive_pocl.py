@@ -35,7 +35,7 @@ class NaiveSearchPOCL:
 
         search = program.naive_search
         search.set_scalar_arg_dtypes([None, None, int, int, None])
-        search(queue, (self.text_len, ), None, d_str, d_pat, self.text_len, len(pattern), d_matches)
+        search(queue, (2*self.pieces_num - 1, ), None, d_str, d_pat, self.text_len, len(pattern), d_matches)
 
         # Wait for the commands to finish before reading back
         queue.finish()

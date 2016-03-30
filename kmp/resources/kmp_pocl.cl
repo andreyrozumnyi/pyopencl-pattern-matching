@@ -12,6 +12,8 @@ __kernel void kmp_search(
     int index_in_piece = 0;
     int piece_len = text_len / pieces_num;
     int k = 0;
+
+    // index_in_piece < piece_len ???
     while ((start+index_in_piece < text_len) && (index_in_piece < piece_len)){
         while ((k > 0) && (pattern[k] != text[start+index_in_piece])){
             k = pi[k-1];
@@ -34,7 +36,6 @@ __kernel void kmp_search(
     if (text_len-start <= piece_len) {
         int index = text_len - pattern_len + 1;
         while (index < text_len) {
-
             matches[index] = 0;
             index++;
         }
