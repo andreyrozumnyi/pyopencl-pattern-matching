@@ -9,7 +9,7 @@ class BoyeerMooreHorspoolPOCL:
         self.text = text
         self.text_len = len(text)
         self.pieces_num = 1
-        self.alphabet = ["A", "C", "G", "T"]
+        self.alphabet_len = 256
 
     def run(self, pattern):
         # Set up OpenCL
@@ -25,13 +25,11 @@ class BoyeerMooreHorspoolPOCL:
             raise ValueError("Choose less number of pieces as one piece length less than pattern length "
                              "or pieces number is more than string length")
 
-        # calculate char table
-        # need to be smt. like numpy.array(self._bad_char_table(pattern)).astype(numpy.int)
-        # table = self._bad_char_table(pattern)
-        table = numpy.array(len(self.alphabet)).astype(numpy.int)
+        # calculate shift table
+        table = numpy.array(self._bad_char_table(pattern)).astype(numpy.int)
 
         # initialize the result array
-        matches = numpy.array(self.text_len).astype(numpy.int)
+        matches = numpy.zeros(self.text_len).astype(numpy.int)
 
         # Create the input (string, pattern, table) strings in device memory and copy data from host
         d_str = cl.Buffer(context, cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR, hostbuf=self.text.encode())
@@ -43,7 +41,7 @@ class BoyeerMooreHorspoolPOCL:
 
         search = program.bmh_search
         search.set_scalar_arg_dtypes([None, None, None, int, int, int, None])
-        search(queue, (self.text_len-len(pattern)+1, ), None, d_str, d_pat, d_table,
+        search(queue, (2*self.pieces_num - 1, ), None, d_str, d_pat, d_table,
                self.text_len, len(pattern), self.pieces_num, d_matches)
 
         # Wait for the commands to finish before reading back
@@ -54,31 +52,19 @@ class BoyeerMooreHorspoolPOCL:
 
         return matches
 
-    # need to be rewrite using array
     def _bad_char_table(self, pattern):
-        shifts = dict()
+        """ calculates amount of shift for each letter """
         pat_len = len(pattern)
-        for i in range(1, pat_len):
-            if pattern[pat_len-i-1] not in shifts:
-                shifts[pattern[pat_len-i-1]] = i
-
-        shifts['others'] = len(pattern)
-        return shifts
-
-    # this logic should be in kernel
-    def _bad_char_shift(self, char, shift_table):
-        if char in shift_table:
-            return shift_table[char]
-        else:
-            return shift_table['others']
+        table = [pat_len for _ in range(self.alphabet_len)]
+        ord_A = ord('A')
+        for i in range(0, pat_len-1):
+            indx = ord(pattern[i]) - ord_A
+            table[indx] = pat_len - 1 - i
+        return table
 
     def read_data_from(file_name):
         """ read all data from file """
         with open(file_name, 'r') as file:
             string = file.read()
         return string
-
-
-obj = BoyeerMooreHorspoolPOCL("AAABBBCCC")
-obj.run("B")
 
