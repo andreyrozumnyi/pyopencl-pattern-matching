@@ -1,0 +1,750 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{blindtext, graphicx}
+\usepackage{hyperref} 
+
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[conference]{../sty/IEEEtran}
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at: 
+% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
+% epslatex.pdf at: http://www.ctan.org/tex-archive/info/
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+% *** MATH PACKAGES ***
+%
+%\usepackage[cmex10]{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics. If using
+% it, be sure to load this package with the cmex10 option to ensure that
+% only type 1 fonts will utilized at all point sizes. Without this option,
+% it is possible that some math symbols, particularly those within
+% footnotes, will be rendered in bitmap form which will result in a
+% document that can not be IEEE Xplore compliant!
+%
+% Also, note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
+% There is also a support site at:
+% http://algorithms.berlios.de/index.html
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
+% especially mdwmath.sty and mdwtab.sty which are used to format equations
+% and tables, respectively. The MDWtools set is already installed on most
+% LaTeX systems. The lastest version and documentation is available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/mdwtools/
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+%\usepackage{eqparbox}
+% Also of notable interest is Scott Pakin's eqparbox package for creating
+% (automatically sized) equal width boxes - aka "natural width parboxes".
+% Available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+% subfigure.sty was written by Steven Douglas Cochran. This package makes it
+% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
+% work, it is a good idea to load it with the tight package option to reduce
+% the amount of white space around the subfigures. subfigure.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at:
+% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
+% subfigure.sty has been superceeded by subfig.sty.
+
+
+
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+% subfig.sty, also written by Steven Douglas Cochran, is the modern
+% replacement for subfigure.sty. However, subfig.sty requires and
+% automatically loads Axel Sommerfeldt's caption.sty which will override
+% IEEEtran.cls handling of captions and this will result in nonIEEE style
+% figure/table captions. To prevent this problem, be sure and preload
+% caption.sty with its "caption=false" package option. This is will preserve
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% (recommended due to many improvements over 1.2) of subfig.sty supports
+% the caption=false option directly:
+%\usepackage[caption=false,font=footnotesize]{subfig}
+%
+% The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
+% The latest version and documentation of caption.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure. The latest version and documentation can be found at:
+% http://www.ctan.org/tex-archive/macros/latex/base/
+
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Documentation is contained in the stfloats.sty comments as well as in the
+% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
+% does not allow \baselineskip to stretch. Authors submitting work to the
+% IEEE should note that IEEE rarely uses double column equations and
+% that authors should try to avoid such use. Do not be tempted to use the
+% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
+% not format its papers in such ways.
+
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/misc/
+% Read the url.sty source comments for usage information. Basically,
+% \url{my_url_here}.
+
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Implementation of exact-pattern matching algorithms using OpenCL and comparison with basic version}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Andrii Rozumnyi}
+\IEEEauthorblockA{Faculty of Science and Technology\\
+Computer Science\\
+University of Tartu\\
+andriiro@ut.ee}}
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+% 
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3}, 
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+%\boldmath
+%\blindtext[1]
+In big text-processing tasks, the exact pattern-matching problem still remains time consuming. As algorithms asymptotically faster than existing ones cannot be developed, there is a need to use another approach to promote efficiency. Thus, parallel computing is able to significantly speed up the process of the exact pattern-matching problem solving. That is why the current work is focused on parallelized version of the most famous algorithms using OpenCL framework. The code base for the project and suggested approach were reviewed and approved by the International Workshop on OpenCL 2016. 
+\end{abstract}
+% IEEEtran.cls defaults to using nonbold math in the Abstract.
+% This preserves the distinction between vectors and scalars. However,
+% if the journal you are submitting to favors bold math in the abstract,
+% then you can use LaTeX's standard command \boldmath at the very start
+% of the abstract to achieve this. Many IEEE journals frown on math
+% in the abstract anyway.
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+exact pattern-matching, Knuth-Morris-Pratt algorithm, Boyer-Moore-Horspool algorithm, OpenCL, PyOpenCL
+\end{IEEEkeywords}
+
+
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introduction}
+First of all, the exact pattern-matching problem (which implies recognition of all the occurrences of a pattern within the text given), nowadays has many different applications such as parsers, word processors, spam filters, DNA applications in Computational Biology, etc. In some cases, when the string length is relatively small, the problem can be efficiently solved by using classical algorithms with linear time complexity. However, in some areas such as Bioinformatics, this task is still a problem due to the huge length of the genomic data (for instance, human genome appear to be around three billion characters) and many patterns (with millions of patterns possible) processing is time consuming. 
+
+Nowadays the volume of work cannot be processed only by the mere power of computational units in reasonable time. Even though linear time complexity algorithms were developed in the previous century, it needs to be improved. As from the asymptotic point of view, it cannot be faster than linear time, the computer science society moved to heterogeneous computing, where GPU’s, CPU’s and other processing units act together as co-processors. 
+
+OpenCL is a powerful standard for task-parallel and data-parallel heterogeneous computing on a variety of modern CPUs, GPUs, DSPs, and other microprocessor designs [1]. It allows the use of wide range of devices in order to perform parallel computing. Therefore, in comparison to existing alternative programming toolkits, this makes it much easier for a developer to begin with a correctly functioning OpenCL program tuned for one architecture and produce a correctly functioning program optimized for another architecture [2].
+
+In this work, we made an attempt to implement naive approach, Knuth-Morris-Pratt and Boyer-Moore-Horspool algorithms and compare them with the same algorithms, but adopted for concurrent processing using the power of OpenCL. 
+
+%\blindtext
+%\subsection{Subsection Heading Here}
+%\blindtext
+
+% needed in second column of first page if using \IEEEpubid
+%\IEEEpubidadjcol
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation Results}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command, the
+% \label for the overall figure must come after \caption.
+% \hfil must be used as a separator to get equal spacing.
+% The subfigure.sty package works much the same way, except \subfigure is
+% used instead of \subfloat.
+%
+%\begin{figure*}[!t]
+%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
+%\label{fig_second_case}}}
+%\caption{Simulation results}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+
+
+% An example of a floating table. Note that, for IEEE style tables, the 
+% \caption command should come BEFORE the table. Table text will default to
+% \footnotesize as IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that IEEE does not put floats in the very first column - or typically
+% anywhere on the first page for that matter. Also, in-text middle ("here")
+% positioning is not used. Most IEEE journals use top floats exclusively.
+% Note that, LaTeX2e, unlike IEEE journals, places footnotes above bottom
+% floats. This can be corrected via the \fnbelowfloat command of the
+% stfloats package.
+
+
+
+\section{Related Works}
+The topics about string matching algorithms are quite popular. The already conducted researches present wide ranges of focusing. Aragon et al. devoted their special attention to energy consumption [3], while Nhat-Phuong focused mostly on memory efficiency [4]. There is bunch of works investigating the performance of exact-pattern matching algorithms on particular hardware architecture [5-8]. At the same time, some studies analyze algorithms in terms of particular application such as Network Security [9, 10]. 
+
+Pandiselvam et al. in [11] analyzed set of algorithms for pattern-matching problem using Biological sequencing data.
+
+
+\section{Theory}
+
+\subsection{Naive Approach}
+
+As a baseline, the naive approach had been chosen to tackle the exact pattern-matching problem. The idea of the algorithm implies the following: For each possible starting position of pattern inside a given string letter by letter is compared. If a mismatch occurs then we move the pattern along the string in one position and repeat the same procedure. If all letters of the pattern had been matched, then we add a starting position of a pattern relatively to the text to the result, move in one position ahead and the same procedure is repeated over again. 
+
+The disadvantage of the algorithm is that it always shifts the pattern only in one position. The naive approach does not use the information on checked characters. Thus, the algorithms complexity is $O(nm)$, where $n$ stands for string length and $m$ – for pattern length. At the same time this process proves to be very easy to implement and debug. Furthermore, no additional pattern or string processing are required. 
+
+\subsection{Knuth-Morris-Pratt (KMP) algorithm}
+
+In contrast to naive approach, KMP makes preprocessing of a pattern. There are a pattern $P$ of a length $m$ and a text $T$ of length $n$. Consider comparing strings on position $i$, where pattern $P[0, m-1]$ is compared to a part of text $T[i, i+m-1]$. Let us assume that a first mismatch occurred between $T[i+j]$ and $P[j]$, where $1 < j < m$. Then $T[i, i+j-1] = P[0, j-1] = Pr$ and $a = T[i+j] \neq P[j] = b$.
+
+After shifting we might assume that prefix of a pattern $P$ coincide with some suffix of $Pr$. The length of the longest prefix, which is at the same time a suffix, is the value of prefix function from string $P$ and index $j$.
+
+It leads to the next algorithm: Let us have $\pi [j]$ – the value of the prefix function from string $P[0, m-1]$ for index $j$. Then after shifting we can continue comparing from $T[i+j]$ and $P[\pi[j]]$ without any missing of pattern occurrences. It can be shown that the table $\pi$ can be calculated in $\theta(m)$ time. As the text will be analyzed only once, the total complexity will be $\theta(m+n)$, where $n$ - length of the $T$. The KMP algorithm performs at most $2n - 1$ text character comparisons during the searching phase [12]. 
+
+\subsection{Boyer-Moore-Horspool (BMH) algorithm}
+
+The algorithm is a modification of Boyer-Moore algorithm, which was invented earlier. It based on the next principals. The algorithm start compare characters from the pattern end to the beginning. If the mismatch was found then the pattern shifts to the right on amount of positions based on bad-character shift rule. In case of BMH we take the character from the text (stop-symbol) which is aligned with the last character in pattern. Then we shift pattern in such a way that it aligns with the right-most position of a stop-symbol inside a pattern. It is implemented using the shifting table: For each symbol of the alphabet, we store the maximal possible shift, which does not skip any occurrences of stop-symbols. Thus, having 1-based indexing $shift(c) = |pattern| - lastpos(c, ~pattern[1 ~..~ |pattern|-1])$, where $lastpos$ – the last position of a symbol in a pattern, $pattern[a ~..~ b]$ – is operation of taking a substring. 
+
+For symbols, which do not occur in a pattern, the shift amount is set to the pattern length. The last symbol of a pattern does not take under consideration; otherwise, the algorithm might be cycled. 
+
+\section{Implementation}
+
+The research was conducted using PyOpenCL, which is a wrapper for OpenCL framework. It has completely the same functionality as OpenCL. 
+
+As it was mentioned in the beginning, all measurements were done using the biological data. The first 10,000,000 characters from the 1-st human chromosome serves as a text. Half of the patterns are taken from the DNA string (in order to be sure that it occurs in a text), while another half is randomly generated by means of DNA alphabet. There are two groups of patterns based on the length: $25, 50, ..., 200$ and $250, 500, ..., 2000$. There is 100 patterns of each length.
+
+All algorithms were implemented in both versions: Basic one-threaded and adopted for concurrent processing using PyOpenCL. The exact pattern-matching problem can be easily parallelized as the algorithm might compare pattern with different parts of the text simultaneously using the concurrent programming approach. We divided the text into 1000 splits and analyzed each of them separately.
+
+All measurements have been done under Windows 8.1 operating systems using the following hardware: Intel Core i5, CPU 2.2 GHz, 8 GB RAM. The chosen Integrated development environment is PyCharm from JetBrains. As laptop has CPU and GPU, measurements were done for both devices (Table \ref{table1}). 
+
+
+\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+\renewcommand{\arraystretch}{1.3}
+\caption{Hardware for Measurements}
+\label{table1}
+\centering
+    \begin{tabular}{|c|p{3cm}|p{3cm}|}
+    \hline
+    & CPU & GPU\\
+    \hline
+    Name & Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz & Intel(R) HD Graphics 5500 \\
+    \hline
+    Number of units & 4 & 24 \\
+    \hline
+    \end{tabular}
+\end{table}
+
+There have been implemented the basic one-threaded version for Rabin-Karp and Boyer-Moore algorithms as well. As work on concurrent version is still in progress, we did not include information on them in measurements section.
+
+\section{Measurements}
+
+All further information about measurements is an average time in seconds for finding all occurrences of one pattern inside a given string. The benchmarks for basic version are in Table \ref{table2} and Table \ref{table3}. 
+
+\begin{table*}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+\caption{Measurements for basic implementation for the 1-st group of patterns}
+\label{table2}
+\centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+    \hline
+    Length & 25 & 50 & 75  & 100  & 125  & 150  & 175  & 200\\
+    \hline
+     Naive, sec & 5.02182 & 5.038513 & 5.031702 & 5.019916 & 5.06889 & 5.072226 & 5.013521 & 5.006208\\
+    \hline
+     KMP, sec & 3.195677 & 3.209536 & 3.189474 & 3.30718 & 3.355372 & 3.387918 & 3.386511 & 3.399092\\
+    \hline
+     BMH, sec & 2.861145 & 2.593235 & 2.911317 & 2.699552 & 2.793429 & 2.699568 & 3.053905 & 2.771127\\
+    \hline
+    \end{tabular}
+\end{table*}
+
+\begin{table*}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+\caption{Measurements for basic implementation for the 2-nd group of patterns}
+\label{table3}
+\centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+    \hline
+    Length & 250 & 500 & 750  & 1000  & 1250  & 1500  & 1750  & 2000\\
+    \hline
+     Naive, sec & 5.574916 & 5.649528 & 5.698257 & 5.659674 & 5.658158 & 5.663552 & 5.713852 & 5.855411\\
+    \hline
+     KMP, sec & 3.851339 & 3.755037 & 3.715272 & 3.680036 & 3.668797 & 3.683142 & 3.693518 & 3.698741\\
+    \hline
+     BMH, sec & 3.065156 & 3.137926 & 3.002268 & 3.004524 & 3.158191 & 3.111886 & 3.242042 & 2.932839\\
+    \hline
+    \end{tabular}
+\end{table*}
+
+
+Even though we do not see the differences in order of magnitude, KMP and BMH are faster than naive approach. If we measure on data of practical size in Computational Biology then the differences will be much more significant.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{1-st}
+    \caption{Acceleration for the 1-st group of patterns on both devices}
+    \label{fig:group1}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{2-nd}
+    \caption{Acceleration for the 2-nd group of patterns on both devices}
+    \label{fig:group2}
+\end{figure}
+
+From the figure \ref{fig:group1} and figure \ref{fig:group2}, we see the next pattern: On GPU we received bigger value in comparison to CPU. Accelerations are similar for different sizes, as we did not create the situation (which is rare case in practical) close to the worst.
+
+In addition, we clearly see that naive approach accelerated even more (up to two times) in comparison to KMP and BMH. Quite foreseeable, as in last two algorithms we have additional tables from preprocessing phase, which we need to pass as a parameter to a function on each kernel. Thus, it is stored in global memory and it takes more time to get access to it. 
+
+More detailed benchmarks (for different number of text splits) may be well found in appendix A and GitHub repository \url{https://github.com/JaakTree/pattern_matching/tree/test}.
+
+
+\section{Conclusion}
+
+This paper elucidates the research conducted on the exact-pattern matching issue. The most widely used algorithms had been hence considered and implemented as well as achieved acceleration had been studied on CPU and GPU devices for specific hardware.
+
+There is an urgent need to continue the current research in both directions: Implement and adopt other algorithms for OpenCL platform and conduct measurements on more powerful hardware.
+Beside that, consumed energy consumption of running the searching procedure can be eventually measured.
+
+In some areas such as Bioinformatics, there is a need to tackle inexact pattern-matching problem. It is more complicated problem; however, the current work might be used as a baseline for solving it. 
+
+
+% use section* for acknowledgement
+\section*{Acknowledgment}
+
+
+The study of the author of this article is supported by the Estonian Foreign Ministry's Development Cooperation and Humanitarian Aid funds.
+
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+
+\begin{thebibliography}{1}
+\bibitem{IEEEhowto:Munshi}
+A. Munshi. (2008). OpenCL Specification Version 1.0 [Online]. Available: \url{https://www.khronos.org/registry/cl/specs/opencl-1.0.pdf}
+
+\bibitem{IEEEhowto:Stone}
+J. Stone, D. Gohara, G. Shi, "A Parallel Programming Standard for Heterogeneous Computing Systems", Computer Science \& Engineering, vol. 12, pp. 66-73, 2010. doi: [10.1109/MCSE.2010.69]
+
+\bibitem{IEEEhowto:Aragon}
+E. Aragon, J. Jimenez, A. Maghazeh et al., "Pattern matching in OpenCL: GPU vs CPU energy consumption on two mobile chipsets", IWOCL, Bristol, UK, 2014. doi: [10.1145/2664666.2664671]
+
+\bibitem{IEEEhowto:Nhat-Phuong}
+N.-P. Tran, "Memory Efficient Parallelization for Aho-Corasick Algorithm on a GPU", High Performance Computing and Communication, Liverpool, UK, 2012. doi: [10.1109/HPCC.2012.65]
+
+\bibitem{IEEEhowto:Myungho}
+N.-P. Tran, M. Lee, S. Hong et al., "Multi-stream Parallel String Matching on Kepler Architecture", MUSIC, pp. 307-313, 2013.
+
+\bibitem{IEEEhowto:Rasool}
+A. Rasool, N. Khare, "Parallelization of KMP String Matching Algorithm on Different SIMD architectures: Multi-Core and GPGPU’s", IJCA, vol. 49, pp. 26-28, Jul, 2012.
+
+\bibitem{IEEEhowto:Assael}
+M. Assael (2013, March). String Matching on hybrid parallel architectures, an approach using MPI and NVIDIA CUDA [Online]. Available: \url{http://www.yannisassael.com/publications/assael_uom_dissertation.pdf}
+
+\bibitem{IEEEhowto:Khare}
+A. Rasool, N. Khare, "Generalized Parallelization of String Matching Algorithms on SIMD Architecture",  IJCSIS, vol. 11, no. 5, pp. 6-16, May, 2013.
+
+\bibitem{IEEEhowto:Jaiswal}
+M. Jaiswal, "Accelerating Enhanced Boyer-Moore String Matching Algorithm on Multicore GPU for Network Security. International Journal od Computer Applications", IJCA, vol. 97, pp. 30-35, Jul, 2015.
+
+\bibitem{IEEEhowto:Sharma}
+J. Sharma, M. Singh, "CUDA based Rabin-Karp Pattern Matching for Deep Packet Inspection on a Multicore GPU", IJCNIS, vol. 10, pp. 70-77, Sept, 2015. doi: [10.5815/ijcnis.2015.10.08]
+
+\bibitem{IEEEhowto:Pandiselvam}
+P. Pandiselvam, T. Marimuthu, R. Lawrance. "A Comparative Study on String Matching Algotthms of Biological Sequences" in  International Conference on Intelligent Computing, Pattaya, 2014, pp. 37-43.
+
+\bibitem{IEEEhowto:Christian}
+C. Christian, L. Thierry, "Knuth-Morris-Pratt algorithm," in Handbook of exact string-matching alorithms Christian Charras, 1-st ed. London, UK:~College Publications, 2004, ch. 7, pp. 47-50.
+
+\end{thebibliography}
+
+
+% biography section
+% 
+% If you have an EPS/PDF photo (graphicx package needed) extra braces are
+% needed around the contents of the optional argument to biography to prevent
+% the LaTeX parser from getting confused when it sees the complicated
+% \includegraphics command within an optional argument. (You could create
+% your own custom macro containing the \includegraphics command to make things
+% simpler here.)
+%\begin{biography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
+% or if you just want to reserve a space for a photo:
+
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{picture}}]{John Doe}
+%\blindtext
+%\end{IEEEbiography}
+
+% You can push biographies down or up by placing
+% a \vfill before or after them. The appropriate
+% use of \vfill depends on what kind of text is
+% on the last page and whether or not the columns
+% are being equalized.
+
+%\vfill
+
+% Can be used to pull up biographies so that the bottom of the last one
+% is flush with the other column.
+%\enlargethispage{-5in}
+
+
+% \appendix  % for no appendix heading
+% do not use \section anymore after \appendix, only \section*
+% is possibly needed
+
+% use appendices with more than one appendix
+% then use \section to start each appendix
+% you must declare a \section before using any
+% \subsection or using \label (\appendices by itself
+% starts a section numbered zero.)
+%
+
+
+\newpage
+
+    \appendices
+    \section{Detailed measurements}
+     
+    \begin{table}[h]
+    %% increase table row spacing, adjust to taste
+    %\renewcommand{\arraystretch}{1.3}
+    \caption{Measurements for the 1-st group of patterns on CPU}
+    \label{table4}
+    \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Length & 25 & 50 & 75  & 100  & 125  & 150  & 175  & 200\\
+        \hline
+         Naive, sec & 0.323474007 & 0.309220052 & 0.303894157 & 0.305363889 & 0.303506517 & 0.303291125 & 0.303220315 & 0.302899404\\
+
+        \hline
+         KMP, sec & 0.311757803 & 0.311536798 & 0.310448842 & 0.311428857 & 0.313387036 & 0.310848417 & 0.31105927 & 0.31536191\\
+        \hline
+        
+         BMH, sec & 0.307938929 & 0.307091517 & 0.308409023 & 0.318847704 & 0.307207699 & 0.308077908 & 0.308912005 & 0.308469448\\
+        \hline
+        \end{tabular}
+    \end{table}
+
+    \begin{table}[h]
+    %% increase table row spacing, adjust to taste
+    %\renewcommand{\arraystretch}{1.3}
+    \caption{Measurements for the 2-nd group of patterns on CPU}
+    \label{table5}
+    \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Length & 250 & 500 & 750  & 1000  & 1250  & 1500  & 1750  & 2000\\
+        \hline
+         Naive, sec & 0.305012364 & 0.304769855 & 0.305656362 & 0.355974698 & 0.357422271 & 0.35072722 & 0.353427548 & 0.343660817\\
+        \hline
+         KMP, sec & 0.341282878 & 0.328195052 & 0.341405015 & 0.36579186 & 0.322969494 & 0.313570914 & 0.325357518 & 0.318204336\\
+        \hline
+         BMH, sec & 0.309918842 & 0.308242202 & 0.307004466 & 0.30654108 & 0.306764998 & 0.307552299 & 0.306757245 & 0.307265573\\
+        \hline
+        \end{tabular}
+    \end{table}
+    
+   \begin{table}[h]
+    %% increase table row spacing, adjust to taste
+    %\renewcommand{\arraystretch}{1.3}
+    \caption{Measurements for the 1-st group of patterns on GPU}
+    \label{table5}
+    \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Length & 25 & 50 & 75  & 100  & 125  & 150  & 175  & 200\\
+        \hline
+         Naive, sec & 0.154338431 & 0.126586719 & 0.125607944 & 0.123725219 & 0.12330503 & 0.125738597 & 0.123485093 & 0.123104715\\
+        \hline
+         KMP, sec & 0.177230687 & 0.173500938 & 0.177494836 & 0.17481236 & 0.175059247 & 0.180018783 & 0.179453397 & 0.179965053\\
+        \hline
+         BMH, sec & 0.12739718 & 0.126916838 & 0.12774735 & 0.127901235 & 0.1284091 & 0.129958887 & 0.126963749 & 0.126885729\\
+        \hline
+        \end{tabular}
+    \end{table}
+
+
+   \begin{table}[h]
+    %% increase table row spacing, adjust to taste
+    %\renewcommand{\arraystretch}{1.3}
+    \caption{Measurements for the 2-nd group of patterns on GPU}
+    \label{table5}
+    \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Length & 250 & 500 & 750  & 1000  & 1250  & 1500  & 1750  & 2000\\
+        \hline
+         Naive, sec & 0.122794113 & 0.124260712 & 0.12234282 & 0.124456096 & 0.123756008 & 0.124711165 & 0.122507715 & 0.124859056\\
+        \hline
+         KMP, sec & 0.17527607 & 0.172276807 & 0.174231391 & 0.18058732 & 0.179690127 & 0.178845682 & 0.174552774 & 0.18151938\\
+        \hline
+         BMH, sec & 0.128773861 & 0.126733084 & 0.125951414 & 0.126282744 & 0.130474501 & 0.12736515 & 0.127961454 & 0.128504658\\
+        \hline
+        \end{tabular}
+    \end{table}
+
+
+
+% that's all folks
+\end{document}
+
+
