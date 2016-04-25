@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#SBATCH -N 1
+
+#SBATCH --ntasks-per-node=10
+ 
+module load python-2.7.3
+module load gcc-4.8.1
+
+srun python measurements.py
+
+
