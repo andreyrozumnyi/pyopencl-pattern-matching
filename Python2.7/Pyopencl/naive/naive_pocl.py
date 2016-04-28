@@ -14,6 +14,7 @@ class NaiveSearchPOCL:
         # Set up OpenCL
         # 0 - means for GPU
         # 1 - means for GPU
+        # 2 - means accelerator
         # otherwise - some of the devices
         if device_type == 0:
             platform = cl.get_platforms()
@@ -22,6 +23,10 @@ class NaiveSearchPOCL:
         elif device_type == 1:
             platform = cl.get_platforms()
             devices = platform[0].get_devices(cl.device_type.CPU)
+            context = cl.Context(devices)
+        elif device_type == 2:
+            platform = cl.get_platforms()
+            devices = platform[0].get_devices(cl.device_type.ACCELERATOR)
             context = cl.Context(devices)
         else:
             context = cl.create_some_context(False)  # don't ask user about platform
@@ -56,8 +61,3 @@ class NaiveSearchPOCL:
         # Read back the results from the compute device
         cl.enqueue_copy(queue, matches, d_matches)
         return matches
-
-
-if __name__ == "__main__":
-    obj = NaiveSearchPOCL("AAAABBB")
-    obj.all_matches("A")

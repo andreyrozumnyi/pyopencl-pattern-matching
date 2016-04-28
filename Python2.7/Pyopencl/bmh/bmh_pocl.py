@@ -14,7 +14,8 @@ class BoyeerMooreHorspoolPOCL:
     def all_matches(self, pattern, device_type=1):
         # Set up OpenCL
         # 0 - means for GPU
-        # 1 - means for CPU
+        # 1 - means for GPU
+        # 2 - means accelerator
         # otherwise - some of the devices
         if device_type == 0:
             platform = cl.get_platforms()
@@ -24,6 +25,13 @@ class BoyeerMooreHorspoolPOCL:
             platform = cl.get_platforms()
             devices = platform[0].get_devices(cl.device_type.CPU)
             context = cl.Context(devices)
+        elif device_type == 2:
+            platform = cl.get_platforms()
+            devices = platform[0].get_devices(cl.device_type.ACCELERATOR)
+            context = cl.Context(devices)
+        else:
+            context = cl.create_some_context(False)  # don't ask user about platform
+
         queue = cl.CommandQueue(context)
 
         with open("Pyopencl/bmh/resources/bmh_pocl.cl", "r") as kernel_file:
