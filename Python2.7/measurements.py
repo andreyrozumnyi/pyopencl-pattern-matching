@@ -97,15 +97,14 @@ class Measurements:
         results = []
         for size in range(self.start, self.end+1, self.step):
             print "size: %d" % (size)
-	        paterns = self._read_patterns(size)
+            patterns = self._read_patterns(size)
             interm_res = []
-            for i in range(0, len(paterns)):
+            for i in range(0, len(patterns)):
                 start = time()
-	            obj.all_matches(paterns[i], self.device_type)
+                obj.all_matches(patterns[i], self.device_type)
                 end = time()
             interm_res.append(end-start)
             results.append(1.0*sum(interm_res)/len(interm_res))
-
         return results
 
     def _read_patterns(self, size):
@@ -113,7 +112,6 @@ class Measurements:
         file_name = self.data_dir + str(size) + ".txt"
         with open(file_name, 'r') as file:
             patterns = [pat.strip() for pat in file]
-
         return patterns
 
     def _write_res_to(self, out_file, results):
@@ -122,12 +120,13 @@ class Measurements:
             file.write("\t".join(str(size) for size in range(self.start, self.end+1, self.step)) + "\n")
             file.write("\t".join(str(res) for res in results) + "\n")
 
+
 def read_data(file_name):
     """ read all data from file """
     with open(file_name, 'r') as file:
         data = file.read()
-
     return data
+
 
 def main():
     genome = read_data("Measurements/data/processed.txt")
