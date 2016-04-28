@@ -10,10 +10,10 @@ class NaiveSearchPOCL:
         self.text_len = len(text)
         self.pieces_num = pieces_number
 
-    def all_matches(self, pattern, device_type=1):
+    def all_matches(self, pattern, device_type):
         # Set up OpenCL
         # 0 - means for GPU
-        # 1 - means for GPU
+        # 1 - means for CPU
         # 2 - means accelerator
         # otherwise - some of the devices
         if device_type == 0:
