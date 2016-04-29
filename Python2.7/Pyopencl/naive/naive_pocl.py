@@ -1,3 +1,4 @@
+
 import numpy
 import pyopencl as cl
 
@@ -5,26 +6,27 @@ import pyopencl as cl
 class NaiveSearchPOCL:
     """ Implementation of Naive search algorithm using OpenCL """
 
-    def __init__(self, text, pieces_number=1):
+    def __init__(self, text, pieces_number=1, device_type=None):
         self.text = text
         self.text_len = len(text)
         self.pieces_num = pieces_number
+	self.device_type = device_type
 
-    def all_matches(self, pattern, device_type):
+    def all_matches(self, pattern):
         # Set up OpenCL
         # 0 - means for GPU
         # 1 - means for CPU
         # 2 - means accelerator
         # otherwise - some of the devices
-        if device_type == 0:
+        if self.device_type == 0:
             platform = cl.get_platforms()
             devices = platform[0].get_devices(cl.device_type.GPU)
             context = cl.Context(devices)
-        elif device_type == 1:
+        elif self.device_type == 1:
             platform = cl.get_platforms()
             devices = platform[0].get_devices(cl.device_type.CPU)
             context = cl.Context(devices)
-        elif device_type == 2:
+        elif self.device_type == 2:
             platform = cl.get_platforms()
             devices = platform[0].get_devices(cl.device_type.ACCELERATOR)
             context = cl.Context(devices)
@@ -52,8 +54,8 @@ class NaiveSearchPOCL:
         d_matches = cl.Buffer(context, cl.mem_flags.WRITE_ONLY, matches.nbytes)
        
         search = program.naive_search
-        search.set_scalar_arg_dtypes([None, None, int, int, None])
-        search(queue, (self.text_len, ), 256, d_str, d_pat, self.text_len, len(pattern), d_matches)
+        search.set_scalar_arg_dtypes([None, None, numpy.uint32, numpy.uint32, None])
+        search(queue, (self.text_len, ), None, d_str, d_pat, self.text_len, len(pattern), d_matches)
 
         # Wait for the commands to finish before reading back
         queue.finish()

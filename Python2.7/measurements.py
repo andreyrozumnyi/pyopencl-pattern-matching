@@ -24,16 +24,15 @@ class Measurements:
         self.bm = BoyerMoore(text)
 
         # initialize objects of PyopenCL versions
-        self.naive_pocl = NaiveSearchPOCL(text, pieces_number=pieces_number)
-        self.kmp_pocl = KnuthMorrisPrattPOCL(text, pieces_number=pieces_number)
-        self.bmh_pocl = BoyeerMooreHorspoolPOCL(text, pieces_number=pieces_number)
+        self.naive_pocl = NaiveSearchPOCL(text, pieces_number=pieces_number, device_type=device_type)
+        self.kmp_pocl = KnuthMorrisPrattPOCL(text, pieces_number=pieces_number, device_type=device_type)
+        self.bmh_pocl = BoyeerMooreHorspoolPOCL(text, pieces_number=pieces_number, device_type=device_type)
 
         self.data_dir = in_dir
         self.res_dir = out_dir
         self.start = start
         self.end = end
         self.step = step
-        self.device_type = device_type
 
     def naive_measurements(self):
         print "Naive algorithm Measurements:"
@@ -100,9 +99,9 @@ class Measurements:
             patterns = self._read_patterns(size)
             interm_res = []
             for i in range(0, len(patterns)):
-                start = time()
-                obj.all_matches(patterns[i], self.device_type)
-                end = time()
+		start = time()
+        	obj.all_matches(patterns[i])
+            	end = time()
             interm_res.append(end-start)
             results.append(1.0*sum(interm_res)/len(interm_res))
         return results
@@ -131,8 +130,9 @@ def read_data(file_name):
 def main():
     genome = read_data("Measurements/data/processed.txt")
     measurements = Measurements(genome, "Measurements/data/25-200/", "Measurements/results/25-200",
-                                pieces_number=1000, start=25, end=200, step=25, device_type=1)
-    measurements.naive_measurements()
+                                pieces_number=1000, start=25, end=200, step=25, device_type=2)
+    # measurements.run_all_basic()
+    # measurements.naive_measurements()
     # measurements.kmp_measurements()
     # measurements.bmh_measurements()
 
@@ -141,13 +141,14 @@ def main():
     # measurements.bmh_pocl_measurements()
 
     measurements2 = Measurements(genome, "Measurements/data/250-2000/", "Measurements/results/250-2000",
-                                 pieces_number=1000, start=250, end=2000, step=250, device_type=1)
-    measurements2.naive_measurements()
+                                 pieces_number=1000, start=250, end=2000, step=250, device_type=2)
+    # measurements2.run_all_basic()
+    # measurements2.naive_measurements()
     # measurements2.kmp_measurements()
     # measurements2.bmh_measurements()
 
-    # measurements2.naive_pocl_measurements()
-    # measurements2.kmp_pocl_measurements()
+    measurements2.naive_pocl_measurements()
+    measurements2.kmp_pocl_measurements()
     # measurements2.bmh_pocl_measurements()
     
 
