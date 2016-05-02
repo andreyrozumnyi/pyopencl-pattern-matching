@@ -274,7 +274,7 @@ andriiro@ut.ee}}
 \begin{abstract}
 %\boldmath
 %\blindtext[1]
-In big text-processing tasks, the exact pattern-matching problem still remains time consuming. As algorithms asymptotically faster than existing ones cannot be developed, there is a need to use another approach to promote efficiency. Thus, parallel computing is able to significantly speed up the process of the exact pattern-matching problem solving. That is why the current work is focused on parallelized version of the most famous algorithms using OpenCL framework. The code base for the project and suggested approach were reviewed and approved by the International Workshop on OpenCL 2016. 
+In big text-processing tasks, the exact pattern-matching problem still remains time consuming. As algorithms asymptotically faster than existing ones cannot be developed, there is a need to use another approach to promote efficiency. Thus, parallel computing is able to significantly speed up the process of the exact pattern-matching problem solving. That is why the current work is focused on parallelized version of the most famous algorithms using OpenCL framework.  
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -467,7 +467,7 @@ There have been implemented the basic one-threaded version for Rabin-Karp and Bo
 
 \section{Measurements}
 
-All further information about measurements is an average time in seconds for finding all occurrences of one pattern inside a given string. The benchmarks for basic version are in Table \ref{table2} and Table \ref{table3}. 
+All further information about measurements is an average time in seconds for finding all occurrences of one pattern inside a given string. The benchmarks for the basic one-threaded Python version, which does not use OpenCL framework, are in Table \ref{table2} and Table \ref{table3}. 
 
 \begin{table*}[!t]
 %% increase table row spacing, adjust to taste
@@ -524,11 +524,13 @@ Even though we do not see the differences in order of magnitude, KMP and BMH are
     \label{fig:group2}
 \end{figure}
 
-From the figure \ref{fig:group1} and figure \ref{fig:group2}, we see the next pattern: On GPU we received bigger value in comparison to CPU. Accelerations are similar for different sizes, as we did not create the situation (which is rare case in practical) close to the worst.
+Figure \ref{fig:group1} and figure \ref{fig:group2} indicates the acceleration of OpenCL version in comparison to basic Python implementation. From those figures we see the next pattern: On GPU we received bigger value in comparison to CPU. Accelerations are similar for different sizes, as we did not create the situation (which is rare case in practical) close to the worst.
 
 In addition, we clearly see that naive approach accelerated even more (up to two times) in comparison to KMP and BMH. Quite foreseeable, as in last two algorithms we have additional tables from preprocessing phase, which we need to pass as a parameter to a function on each kernel. Thus, it is stored in global memory and it takes more time to get access to it. 
 
-More detailed benchmarks (for different number of text splits) may be well found in appendix A and GitHub repository \url{https://github.com/JaakTree/pattern_matching/tree/test}.
+More detailed benchmarks (for different number of text splits) may be well found in appendix A and GitHub repository \url{https://github.com/JaakTree/pattern_matching/tree/test}. The repository contains as well measurements for two more types of devices: Intel® Xeon® CPU E5-2660 v2 @ 2.2GHz and Xeon Phi. The results are unpredictably slow, furthermore, the implementation of BMH does not run at all there. One of the possible reason might be the different version of OpenCL framework, as for laptop version we used OpenCL 2.0, while on server side there is only OpenCL 1.2. However, it might be other reasons as well, but the author cannot identify them due to lack of knowledge in concurrent programming. Thus, it requires further thorough analysis.
+
+The mentioned repository contains basic implementation of exact pattern-matching algorithms in C++. My colleague was planned to work on C++ OpenCL version, but he stopped only on basic one-threaded implementation. Thus, there is a need to continue research in this direction as well, as it might give good insights into understanding OpenCL framework and PyOpenCL wrapper.  
 
 
 \section{Conclusion}
@@ -540,6 +542,7 @@ Beside that, consumed energy consumption of running the searching procedure can 
 
 In some areas such as Bioinformatics, there is a need to tackle inexact pattern-matching problem. It is more complicated problem; however, the current work might be used as a baseline for solving it. 
 
+The code base for the project and suggested approach were reviewed and approved by the International Workshop on OpenCL 2016.
 
 % use section* for acknowledgement
 \section*{Acknowledgment}
@@ -751,3 +754,5 @@ G. Navarro, M. Raffinot, "Horspool algorithm," in Flexible Pattern Matching in S
 
 % that's all folks
 \end{document}
+
+
